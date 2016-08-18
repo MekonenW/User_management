@@ -1,0 +1,31 @@
+<style>table{width: 800px}</style>
+<h1>Listing Users</h1>
+<table border='1'>
+	<tr>
+		<th>First name</th>
+		<th>Last name</th>
+		<th>Email</th>
+		<th>Action</th>
+	</tr>
+	<% @users.each do |user| %>
+	<tr>
+		<td><%=user.first_name%></td>
+		<td><%=user.last_name%></td>
+		<td><%=user.email%></td>
+		<td>
+			<a href="/users/<%= user.id%>">Show</a> 
+			<a href="/users/<%= user.id%>/edit">Edit</a>  
+			<form action='/users/<%= user.id %>' method='post'>
+				<input type='hidden' name="authenticity_token" value="<%= form_authenticity_token %>">
+				<input type='hidden' name='_method' value='delete'>
+				<button type='submit'>Destroy</button>
+
+			</form>
+			 
+		</td>
+
+	</tr>
+	<% end %>
+
+</table>
+<h2><a href="users/new">New user</a></h2>
